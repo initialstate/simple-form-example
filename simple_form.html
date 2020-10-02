@@ -2,11 +2,11 @@
 <form action="/temperature" method="post" enctype="application/x-www-form-urlencoded">
 	<div>
         <label for="temp">Temp:</label>
-        <input type="text" id="temp" name="temp"/>
+        <input type="text" id="temp" name="temp" pattern="[W+]{3}" required/>
     </div>
 
     <div class="button">
-        <button type="submit">Send</button>
+        <button type="submit" required>Send</button>
     </div>
 </form>
 </html>
