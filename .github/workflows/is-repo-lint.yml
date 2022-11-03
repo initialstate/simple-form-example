@@ -15,7 +15,7 @@ jobs:
   public-or-private-repo:
     runs-on: ubuntu-latest
     outputs:
-      repo-state: ${{ steps.repo-state.outputs.repostate }}
+      repostate: ${{ steps.repo-state.outputs.repostate }}
     steps:
 
       - name: Repo state
@@ -54,7 +54,7 @@ jobs:
         run: echo CODEOWNERS file does not exist!
   
       - name: Repo state
-        run: echo ${{ needs.public-or-private-repo.outputs.repo-state }}
+        run: echo ${{ needs.public-or-private-repo.outputs.repostate }}
   
   check-for-readme-file:
     runs-on: ubuntu-latest
@@ -81,7 +81,7 @@ jobs:
         run: echo README file does not exist!
 
   check-for-license:
-    if: needs.public-or-private-repo.outputs.repo-state.env.state == 'public'
+    if: needs.public-or-private-repo.outputs.repostate == 'public'
     runs-on: ubuntu-latest
     steps:
 
