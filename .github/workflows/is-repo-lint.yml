@@ -59,7 +59,10 @@ jobs:
       - name: CODEOWNERS file does not exist
         if: steps.codeowners_file.outputs.file_exists == 'false'
         run: echo CODEOWNERS file does not exist!
-
+  
+      - name: Repo state
+        run: echo ${{ public-or-private-repo.outputs.repo-state }}
+  
   check-for-readme-file:
     runs-on: ubuntu-latest
     steps:
