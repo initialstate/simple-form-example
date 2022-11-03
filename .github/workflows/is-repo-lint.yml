@@ -23,7 +23,6 @@ jobs:
         env:
             state: ${{ env.state }}
         run: echo "repostate=$env.state" >> $GITHUB_OUTPUT
-             echo "Workflow has repo set as private. If this is incorrect, uncomment line 12."
       - name: Repo public?
         env:
             state: ${{ env.state }}
@@ -61,7 +60,7 @@ jobs:
         run: echo CODEOWNERS file does not exist!
   
       - name: Repo state
-        run: echo ${{ jobs.public-or-private-repo.outputs.repo-state }}
+        run: echo ${{ needs.public-or-private-repo.outputs.repo-state }}
   
   check-for-readme-file:
     runs-on: ubuntu-latest
