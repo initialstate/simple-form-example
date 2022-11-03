@@ -22,8 +22,6 @@ jobs:
         id: repo-state
         run: echo "repostate=$env.state" >> $GITHUB_OUTPUT
       - name: Repo public?
-        env:
-            state: ${{ env.state }}
         if: "${{ env.state == 'public' }}"
         run: echo "Workflow has repo set as public. If this is incorrect, uncomment line 12."
       - name: Repo private?
