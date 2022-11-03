@@ -15,7 +15,7 @@ jobs:
   public-or-private-repo:
     runs-on: ubuntu-latest
     outputs:
-      repo-state: ${{ steps.repo-state.outputs.repostate }}
+      repo-state: ${{ steps.repo-state.outputs.repostate.env.state }}
     steps:
 
       - name: Repo state
