@@ -60,7 +60,7 @@ jobs:
         run: echo CODEOWNERS file does not exist!
   
       - name: Repo state
-        run: echo ${{ needs.public-or-private-repo.outputs.repo-state }}
+        run: echo ${{ needs.public-or-private-repo.outputs.repo-state.env.state }}
   
   check-for-readme-file:
     runs-on: ubuntu-latest
