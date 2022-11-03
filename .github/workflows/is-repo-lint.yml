@@ -15,12 +15,12 @@ jobs:
   public-or-private-repo:
     runs-on: ubuntu-latest
     outputs:
-      repo-state: ${{ steps.repo-state.outputs.repostate.env.state }}
+      repo-state: ${{ steps.repo-state.outputs.repostate }}
     steps:
 
       - name: Repo state
         id: repo-state
-        run: echo "repostate=$env.state" >> $GITHUB_OUTPUT
+        run: echo "repostate=${{env.state}}" >> $GITHUB_OUTPUT
       - name: Repo public?
         if: "${{ env.state == 'public' }}"
         run: echo "Workflow has repo set as public. If this is incorrect, uncomment line 12."
