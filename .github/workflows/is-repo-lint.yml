@@ -27,8 +27,6 @@ jobs:
       - name: Repo private?
         if: "${{ env.state == 'private' }}"
         run: echo "Workflow has repo set as private. If this is incorrect, uncomment line 12."
-      - name: Repo output
-        run: echo ${{ steps.repo-state.outputs.repostate }}
 
   check-for-codeowners-file:
     runs-on: ubuntu-latest
@@ -53,9 +51,6 @@ jobs:
       - name: CODEOWNERS file does not exist
         if: steps.codeowners_file.outputs.file_exists == 'false'
         run: echo CODEOWNERS file does not exist!
-  
-      - name: Repo state
-        run: echo ${{ needs.public-or-private-repo.outputs.repostate }}
   
   check-for-readme-file:
     runs-on: ubuntu-latest
@@ -156,7 +151,8 @@ jobs:
         run: echo codeql-analysis file does not exist!
 
   check-for-personal-access-token:
-    if: needs.public-or-private-repo.outputs.repo-state == 'public'
+    needs: public-or-private-repo
+    if: needs.public-or-private-repo.outputs.repostate == 'public'
     runs-on: ubuntu-latest
     steps:
 
