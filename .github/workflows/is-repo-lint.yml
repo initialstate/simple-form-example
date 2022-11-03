@@ -15,26 +15,18 @@ jobs:
   public-or-private-repo:
     runs-on: ubuntu-latest
     outputs:
-      repo-state: ${{ steps.repo-state.outputs.repostate }}
+      repostate: ${{ steps.repo-state.outputs.repostate }}
     steps:
 
       - name: Repo state
         id: repo-state
-        env:
-            state: ${{ env.state }}
-        run: echo "repostate=$env.state" >> $GITHUB_OUTPUT
-             echo "Workflow has repo set as private. If this is incorrect, uncomment line 12."
+        run: echo "repostate=${{env.state}}" >> $GITHUB_OUTPUT
       - name: Repo public?
-        env:
-            state: ${{ env.state }}
         if: "${{ env.state == 'public' }}"
-        run: echo "Workflow has repo set as public. If this is incorrect, uncomment line 12."
+        run: echo "Workflow has repo set as public. If this is incorrect, uncomment line 11."
       - name: Repo private?
-        env:
-            state: ${{ env.state }}
         if: "${{ env.state == 'private' }}"
         run: echo "Workflow has repo set as private. If this is incorrect, uncomment line 12."
-
 
   check-for-codeowners-file:
     runs-on: ubuntu-latest
@@ -59,7 +51,7 @@ jobs:
       - name: CODEOWNERS file does not exist
         if: steps.codeowners_file.outputs.file_exists == 'false'
         run: echo CODEOWNERS file does not exist!
-
+  
   check-for-readme-file:
     runs-on: ubuntu-latest
     steps:
@@ -85,7 +77,8 @@ jobs:
         run: echo README file does not exist!
 
   check-for-license:
-    if: needs.public-or-private-repo.outputs.repo-state == 'public'
+    needs: public-or-private-repo
+    if: needs.public-or-private-repo.outputs.repostate == 'public'
     runs-on: ubuntu-latest
     steps:
 
@@ -158,7 +151,8 @@ jobs:
         run: echo codeql-analysis file does not exist!
 
   check-for-personal-access-token:
-    if: needs.public-or-private-repo.outputs.repo-state == 'public'
+    needs: public-or-private-repo
+    if: needs.public-or-private-repo.outputs.repostate == 'public'
     runs-on: ubuntu-latest
     steps:
 
