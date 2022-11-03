@@ -87,7 +87,7 @@ jobs:
         run: echo README file does not exist!
 
   check-for-license:
-    if: needs.public-or-private-repo.outputs.repo-state == 'public'
+    if: needs.public-or-private-repo.outputs.repo-state.env.state == 'public'
     runs-on: ubuntu-latest
     steps:
 
