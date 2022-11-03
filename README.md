@@ -1,5 +1,7 @@
 # Simple HTML Form
 
+![repo linter workflow](https://github.com/initialstate/simple-form-example/actions/workflows/is-repo-lint.yml/badge.svg)
+
 This is a simple example of using an HTML form to submit data to a nodejs server app that then sends the data to Initial State.
 
 The reason this app uses an intermediary nodejs server instead of submitting directly to Initial State is to give the implementer control over the exposure of his/her Initial State Access Key.
