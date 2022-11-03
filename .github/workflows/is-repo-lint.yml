@@ -27,7 +27,8 @@ jobs:
       - name: Repo private?
         if: "${{ env.state == 'private' }}"
         run: echo "Workflow has repo set as private. If this is incorrect, uncomment line 12."
-
+      - name: Repo output
+        run: echo ${{ steps.repo-state.outputs.repostate }}
 
   check-for-codeowners-file:
     runs-on: ubuntu-latest
